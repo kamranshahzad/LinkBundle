@@ -1,0 +1,33 @@
+
+
+
+
+
+{% block groupchoice_widget %}
+
+    <div class="form-group">
+    {% for child in form %}
+        <div class="form-group">
+        <h5>{{ child.vars.label }}</h5>
+        </div>
+        <div class="row">
+        {{ form_widget(child) }}
+        </div>
+    {% endfor %}
+    </div>
+
+{% endblock groupchoice_widget %}
+
+
+{% block childchoicetype_widget %}
+
+    {% for child in form %}
+        <div class="col-sm-3">
+        {{ form_widget(child) }}
+        <span style="color:#5c5c5c;">
+        &#32;{{ form_label(child) }}
+        </span>
+        </div>
+    {% endfor %}
+
+{% endblock childchoicetype_widget %}

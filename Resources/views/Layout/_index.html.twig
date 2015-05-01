@@ -1,0 +1,14 @@
+{% extends themes %}
+{% set actionUrl = app.request.attributes.get('_route') %}
+
+{% block body %}
+
+    {% if actionUrl == 'links_index' %}
+
+        {% set vars = {'form':form} %}
+        {% include 'KamranLinkBundle:partail:links-index.html.twig' with vars %}
+
+    {# end of 'links_index' #}
+    {% endif %}
+
+{% endblock body %}

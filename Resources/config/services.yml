@@ -1,0 +1,7 @@
+
+
+services:
+    karmran.symfony.form.tree:
+        class: "Kamran\\Symfony\\Form\\Type\\TreeType"
+        tags:
+            - { name: form.type, alias: y_tree }

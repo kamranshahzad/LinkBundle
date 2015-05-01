@@ -1,0 +1,80 @@
+
+<div class="col-md-6 tcolor2" style="min-height: 800px; padding: 5px;">
+
+    <h5 class="f-color-3">Filter Links</h5>
+    <form class="entity" action="{{ path('links_filterlinks') }}" method="post" {{ form_enctype(form) }} >
+        <div class="form-group">
+            {{ form_widget(form.keyword) }}
+        </div>
+
+        {{ form_widget(form.technologies) }}
+
+        {{ form_widget(form.tags) }}
+
+        <h6>Target Countries</h6>
+        {{ form_widget(form.countries) }}
+
+    </form>
+
+    <script>
+
+        $.ajaxSetup ({ cache: false });
+
+        var tagItems = [];
+        $('#technology_tools').on('click',':input',function(event){
+            var name = $(this).attr('id');
+            var pattern = /\d[0-9]*$/;
+            var id = name.match(pattern)[0];
+
+            if($(this).is(':checked')){
+                console.log( $(this).html());
+                tagItems.push(id);
+            }else{
+                tagItems.splice(tagItems.indexOf(id), 1);
+            }
+            loadLinksFilter();
+        });
+
+        $('#tags').on('click',':input',function(event){
+            var name = $(this).attr('id');
+            var pattern = /\d[0-9]*$/;
+            var id = name.match(pattern)[0];
+
+            if($(this).is(':checked')){
+
+                tagItems.push(id);
+            }else{
+                tagItems.splice(tagItems.indexOf(id), 1);
+            }
+            loadLinksFilter();
+        });
+
+
+        function loadLinksFilter(){
+            $('#filterLinksResult').html('Loading results....');
+            var url = Routing.generate('links_filterlinks');
+            $.getJSON(
+                    url,
+                    {'tagItems':tagItems},
+                    function(json) {
+                        var html = '';
+                        html += '<h6>Total links found: <b>'+json.length +'</b></h6>';
+                        html += '<ul class="list-group">';
+                        $.each( json , function( i , item ) {
+                            html += '<li class="list-group-item">'+item+'</li>';
+                        });
+                        html += '</ul';
+                        $('#filterLinksResult').html(html);
+                    }
+            );
+        }
+    </script>
+
+    <!-- @col-->
+</div>
+
+
+<div class="col-md-6" style="padding: 10px;" >
+    <div id="filterLinksResult"></div>
+    <!-- @col-->
+</div>

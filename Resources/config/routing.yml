@@ -1,0 +1,4 @@
+links_annotation:
+    resource: "@KamranLinkBundle/Controller"
+    type:     annotation
+    

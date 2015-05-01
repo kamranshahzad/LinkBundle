@@ -1,0 +1,16 @@
+{% extends themes %}
+
+
+{% block body %}
+
+    <h2>Upload bulk link file</h2>
+
+    <p>Your file successfull uploaded </p>
+
+    <p>
+        <a href="{{ path('links_bulklinks_view') }}" >Back</a>
+    </p>
+
+    <p> <b>{{  app.request.attributes.get('urlcounts') }}</b> Links saved successfully.</p>
+
+{% endblock %}

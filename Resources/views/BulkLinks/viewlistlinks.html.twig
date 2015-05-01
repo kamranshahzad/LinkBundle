@@ -1,0 +1,49 @@
+ <h4>{{ name }}</h4>
+
+<h6 style="color:orange;">Total Links: ( <span style="font-size: 16px;color: red;"> {{ items | length}} </span>) </h6>
+ <table class="table">
+ <thead>
+ <tr>
+     <th >Links</th>
+     <th width="150" style="text-align: center;">Options</th>
+ </tr>
+ </thead>
+ <tbody>
+ {% for item in items %}
+ <tr>
+     <td> <a href="{{ item.link }}" target="_blank"> {{ item.link }} </a> </td>
+     <td> <a href="{{ path('links_bulklinks_add',{ 'id':item.id })}}" class="btn btn-success btn-xs" >Add ...</a> &nbsp;  <a href="{{ item.id }}" data-item="{{ item.name }}" class="btn btn-danger btn-xs optionBtns" >remove</a> </td>
+ </tr>
+ {% endfor %}
+ </tbody>
+ </table>
+
+ <script>
+
+     $('.optionBtns').on('click',function(event){
+         event.preventDefault();
+         var linkid = $( this ).attr( "href" );
+         var listname = $(this).data('item');
+
+        $.ajaxSetup ({
+             cache: false
+         });
+         var tagetUrl = Routing.generate('links_bulklinks_remove', { id: linkid });
+         $.ajax({
+             url: tagetUrl,
+             listname: 'abc'
+         }).done(function(data) {
+            loadListItems(listname);
+         });
+     });
+
+     function loadListItems(listVal){
+         if(listVal != ''){
+             $.ajaxSetup ({
+                 cache: false
+             });
+             var url = '{{ path('links_bulklinks_viewbylist') }}';
+             $('#linkContainer').html("<b>Loading</b>").load(url,{listname:listVal});
+         }
+     }
+ </script>

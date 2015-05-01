@@ -1,0 +1,32 @@
+{% extends themes %}
+
+
+{% block body %}
+
+    <h2>Upload bulk link file</h2>
+
+    <form class="entity" action="{{ path('links_bulklinks_upload') }}" method="post" {{ form_enctype(form) }} >
+       
+
+        {{ form_errors(form) }}
+
+        <div class="form-group">
+        	{{ form_widget(form.name) }}
+       	</div>
+
+       	<div class="form-group">
+        	{{ form_widget(form.file) }}
+       	</div>
+
+        {{ form_rest(form) }}
+
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="create" />
+        </div>
+        
+    </form>
+
+    <br/>
+
+{% endblock %}

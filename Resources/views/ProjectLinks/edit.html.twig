@@ -1,0 +1,53 @@
+{% extends themes %}
+
+{% block body %}
+
+
+    <h4>Edit Article Link</h4>
+    <form class="entity" action="{{ path('links_article_edit',{'id':id }) }}" method="post" {{ form_enctype(form) }} >
+
+        {{ form_widget(form._token) }}
+
+        <div class="form-group">
+            {{ form_widget(form.url) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_widget(form.description) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_widget(form.technology) }}
+        </div>
+
+        <div class="form-group" id="tagsWrapper" data-item="{{ form.technology.vars.value }}">
+            {{ form_widget(form.tags) }}
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="modify" />
+        </div>
+    </form>
+
+    <br/><br/>
+    <script type="text/javascript">
+        $('#{{ form.technology.vars.id }}').change(function() {
+            var tool_id = $(this).val();
+            var tech_id = $('#tagsWrapper').data('item');
+            $('#tagsWrapper').html('Loading ...');
+
+            if(tool_id){
+                $.ajax({
+                    url: Routing.generate('links_article_tags_edit', { 'tool': tool_id , 'tech_id':tech_id }),
+                    type: 'GET',
+                    cache: false,
+                    success: function (data) {
+                        $('#tagsWrapper').html(data);
+                    }
+                });
+            }
+        });
+    </script>
+
+{% endblock body %}
