@@ -4,7 +4,7 @@
 
 Save useful web links/urls in this bundle.
 
-![alt text](https://github.com/kamranshahzad/https://github.com/kamranshahzad/LinkBundle/blob/master/Resources/public/images/link_screenshot.png "Links screenshot")
+![alt text](https://github.com/kamranshahzad/LinkBundle/blob/master/Resources/public/images/link-screenshot.png "Links screenshot")
 
 
 ## Installation.
